@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>animals</ion-title>
+    
+    
+    <ion-button routerLink="/main" >Home</ion-button>
+  
+   
+    <!--<ion-buttons slot="end">-->
+
+    <ion-button (click)="toggleReorder()" [color]="reorderDisabled?'primary':'success'" slot="end">
+      <ion-icon name="reorder"></ion-icon>
+    </ion-button>
+    <!--</ion-buttons>-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-reorder-group [disabled]="reorderDisabled" (ionItemReorder)="onReorder($event)">
+      <ion-item *ngFor="let animal of animals" (click)="guess(animal)">
+        <ion-avatar slot="start">
+          <ion-img src="/assets/{{ animal.image }}"></ion-img>
+        </ion-avatar>
+
+        <ion-grid>
+
+          <ion-row>
+            <ion-col>
+              <h3>{{ animal.title }}</h3>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              {{ animal.desc }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-reorder [hidden]="reorderDisabled"></ion-reorder>
+
+      </ion-item>
+    </ion-reorder-group>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" (click)="playSound()" [color]="chosenAnimal?'danger':'secondary'">
+      PLAY</ion-button>
+  </ion-toolbar>
+</ion-footer>
